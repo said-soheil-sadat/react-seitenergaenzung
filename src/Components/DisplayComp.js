@@ -1,5 +1,5 @@
-import React from 'react';
-import {fillPageOption} from "../Constants/MainConst";
+import React, {useState} from 'react';
+import {fillPageOption, inputNumbers} from "../Constants/MainConst";
 import FifoComp from "./PageMethod/FifoComp";
 import LfuComp from "./PageMethod/LfuComp";
 import LruComp from "./PageMethod/LruComp";
@@ -7,40 +7,25 @@ import SecChanceComp from "./PageMethod/SecChanceComp";
 
 function DisplayComp(props) {
 
-    const pageSize = props.pageSize;
-    const pageMethod = props.pageMethod;
-
-    const inputNumbers = () => {
-        let x = [];
-        for (let i = 1; i <= 9; i++) {
-            x.push(i);
-        }
-        return x;
+    const [addNumber, setAddNumber] = useState(inputNumbers()[0]);
+    const updateAddNumber = (e) => {
+        setAddNumber(parseInt(e.target.value));
     }
-
-    const addNumberRef = React.createRef();
-
 
     return (
         <div>
-            <h3>This is the Display Component, you selected {pageMethod} Method with {pageSize} pages.</h3>
-            <br/>
 
-            {props.pageMethod === "fifo" ? <FifoComp getNumber={addNumberRef} pageSize={pageSize}/> : ""}
-            {props.pageMethod === "lfu" ? <LfuComp getNumber={addNumberRef} pageSize={pageSize}/> : ""}
-            {props.pageMethod === "lru" ? <LruComp getNumber={addNumberRef} pageSize={pageSize}/> : ""}
-            {props.pageMethod === "secChance" ? <SecChanceComp getNumber={addNumberRef} pageSize={pageSize}/> : ""}
+            {props.pageMethod === "fifo" ? <FifoComp getNumber={addNumber} pageSize={props.pageSize}/> : ""}
+            {props.pageMethod === "lfu" ? <LfuComp getNumber={addNumber} pageSize={props.pageSize}/> : ""}
+            {props.pageMethod === "lru" ? <LruComp getNumber={addNumber} pageSize={props.pageSize}/> : ""}
+            {props.pageMethod === "secChance" ? <SecChanceComp getNumber={addNumber} pageSize={props.pageSize}/> : ""}
 
             Select your input:
-            <select ref={addNumberRef}>
+            <select onChange={updateAddNumber}>
                 {inputNumbers().map(i =>
                     fillPageOption("input_", i))}
             </select>
             <br/>
-
-            {/*<button onClick={handleNumber}>Add Number</button>*/}
-
-
         </div>
     );
 }

@@ -13,23 +13,25 @@ const MainComp = () => {
     const [selectedPageSize, updatePageSize] = useState(pageSizeConst.min);
     const [selectedPageMethod, updatePageMethod] = useState(pageMethodsConst[0].id);
 
-    function updatePageSizeOnChange(e) {
+    const updatePageSizeOnChange = (e) => {
         updatePageSize(e.target.value);
     }
-
-    function updatePageMethodOnChange(e) {
+    const updatePageMethodOnChange = (e) => {
         updatePageMethod(e.target.value);
     }
 
     return <div>
-        <h1>Welcome to the Main Component.</h1>
-        Select method:
+        <h1>Seitenergänzungsstrategie mit React.js</h1>
+
+        Methode wählen:
         <select onChange={updatePageMethodOnChange}>
             {pageMethodsConst.map(method =>
                 makeMethodOption(method))}
         </select>
+
         <br/>
-        Select page size:
+
+        Seitenanzahl wählen:
         <select onChange={updatePageSizeOnChange}>
             {makePageSizeOptionsConst().map(i =>
                 fillPageOption("page_", i))}

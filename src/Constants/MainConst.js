@@ -18,14 +18,27 @@ export const makePageSizeOptionsConst = () => {
         x.push(i);
     }
     return x;
-}
+};
 
 export const makeMethodOption = (item) => {
-    return <option key={item.id} value={item.id}>{item.display}</option>
-}
+    return <option key={item.id} value={item.id}>
+        {item.display}</option>
+};
 
 export const fillPageOption = (prefix, i) => {
     const keyId = prefix + i;
     return <option key={keyId} value={i}>{i}</option>;
-}
+};
 
+export const hitCounter = {
+    hits: 0,
+    miss: 0
+};
+
+export const inputNumbers = () => {
+    let x = [];
+    for (let i = 1; i <= 9; i++) {
+        x.push(i);
+    }
+    return x;
+}
